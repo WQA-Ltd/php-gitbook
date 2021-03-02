@@ -39,4 +39,9 @@ class GitbookClient
 
         return null;
     }
+
+    public function space(string $spaceUid): SpaceClient
+    {
+        return new SpaceClient($this->client, $spaceUid);
+    }
 }

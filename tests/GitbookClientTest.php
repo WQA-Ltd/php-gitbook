@@ -30,9 +30,6 @@ class GitbookClientTest extends TestCase
 
     public function test_can_get_current_user()
     {
-        $client = new GitbookClient($this->secretKey);
-        $user = $client->getCurrentUser();
-
-        $this->assertInstanceOf(User::class, $user);
+        $this->assertInstanceOf(User::class, $this->client->getCurrentUser());
     }
 }
