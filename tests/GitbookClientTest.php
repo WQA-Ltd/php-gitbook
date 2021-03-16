@@ -50,4 +50,11 @@ class GitbookClientTest extends TestCase
         $this->assertIsArray($spaces);
         $this->assertInstanceOf(Space::class, $spaces[0]);
     }
+
+    public function test_can_get_spaces_for_specific_user()
+    {
+        $spaces = $this->client->getSpacesFor('73tH0MyJh3d5KQqzia3IK7T37gV2');
+        $this->assertIsArray($spaces);
+        $this->assertInstanceOf(Space::class, $spaces[0]);
+    }
 }

@@ -39,3 +39,10 @@ $gitbook->getUser($userUid);
 ```php
 $gitbook->getSpaces();
 ```
+
+## Get spaces for specific user or organisation
+
+```php
+$gitbook->getSpacesFor($userUid);
+$gitbook->getSpacesFor($organisationUid);
+```

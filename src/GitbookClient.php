@@ -64,6 +64,17 @@ class GitbookClient
         return null;
     }
 
+    public function getSpacesFor(string $ownerId): array
+    {
+        $response = $this->client->request('GET', '/owners/' . $ownerId . '/spaces');
+
+        if ($response->getStatusCode() === 200) {
+            return Space::createMultipleFromApi($response->getBody());
+        }
+
+        return null;
+    }
+
     public function space(string $spaceUid): SpaceClient
     {
         return new SpaceClient($this->client, $spaceUid);
