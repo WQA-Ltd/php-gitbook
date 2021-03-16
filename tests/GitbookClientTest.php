@@ -4,6 +4,7 @@ namespace WQA\Gitbook\Tests;
 
 use Dotenv\Dotenv;
 use WQA\Gitbook\Models\User;
+use WQA\Gitbook\Models\Space;
 use WQA\Gitbook\GitbookClient;
 use PHPUnit\Framework\TestCase;
 
@@ -41,5 +42,12 @@ class GitbookClientTest extends TestCase
     public function test_get_user_returns_null_if_invalid_id_provided()
     {
         $this->assertNull($this->client->getUser('invalid_id'));
+    }
+
+    public function test_can_get_spaces()
+    {
+        $spaces = $this->client->getSpaces();
+        $this->assertIsArray($spaces);
+        $this->assertInstanceOf(Space::class, $spaces[0]);
     }
 }

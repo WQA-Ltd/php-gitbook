@@ -8,7 +8,7 @@ Note that The GitBook API is still in beta, so the underlying API and this wrapp
 - ✅ Get User
 - ⬜️ Get Organization
 - ⬜️ Get Organisations
-- ⬜️ List Current User Spaces
+- ✅ List Current User Spaces
 - ⬜️ List User or Organization Spaces
 - ⬜️ Get Space
 - ⬜️ Get Space Content Analytics
@@ -32,4 +32,10 @@ $gitbook->getCurrentUser();
 
 ```php
 $gitbook->getUser($userUid);
+```
+
+## Get spaces for current user
+
+```php
+$gitbook->getSpaces();
 ```

@@ -16,4 +16,18 @@ abstract class Model
 
         return $self;
     }
+
+    public static function createMultipleFromApi(string $jsonString): array
+    {
+        $data = json_decode($jsonString);
+        $models = [];
+
+        if (property_exists($data, 'items')) {
+            foreach ($data->items as $item) {
+                $models[] = self::createFromApi(json_encode($item));
+            }
+        }
+
+        return $models;
+    }
 }

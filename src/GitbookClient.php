@@ -4,6 +4,7 @@ namespace WQA\Gitbook;
 
 use GuzzleHttp\Client;
 use WQA\Gitbook\Models\User;
+use WQA\Gitbook\Models\Space;
 
 class GitbookClient
 {
@@ -47,6 +48,17 @@ class GitbookClient
 
         if ($response->getStatusCode() === 200) {
             return User::createFromApi($response->getBody());
+        }
+
+        return null;
+    }
+
+    public function getSpaces(): array
+    {
+        $response = $this->client->request('GET', 'user/spaces');
+
+        if ($response->getStatusCode() === 200) {
+            return Space::createMultipleFromApi($response->getBody());
         }
 
         return null;
