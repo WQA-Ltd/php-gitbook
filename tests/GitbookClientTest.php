@@ -32,4 +32,14 @@ class GitbookClientTest extends TestCase
     {
         $this->assertInstanceOf(User::class, $this->client->getCurrentUser());
     }
+
+    public function test_can_get_user()
+    {
+        $this->assertInstanceOf(User::class, $this->client->getUser('73tH0MyJh3d5KQqzia3IK7T37gV2'));
+    }
+
+    public function test_get_user_returns_null_if_invalid_id_provided()
+    {
+        $this->assertNull($this->client->getUser('invalid_id'));
+    }
 }

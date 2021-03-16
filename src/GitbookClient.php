@@ -25,6 +25,7 @@ class GitbookClient
 
         return new Client([
             'base_uri' => 'https://api-beta.gitbook.com/v1/',
+            'http_errors' => false,
             'headers' => $headers,
         ]);
     }
@@ -32,6 +33,17 @@ class GitbookClient
     public function getCurrentUser(): ?User
     {
         $response = $this->client->request('GET', 'user');
+
+        if ($response->getStatusCode() === 200) {
+            return User::createFromApi($response->getBody());
+        }
+
+        return null;
+    }
+
+    public function getUser(string $userUid): ?User
+    {
+        $response = $this->client->request('GET', 'owners/' . $userUid);
 
         if ($response->getStatusCode() === 200) {
             return User::createFromApi($response->getBody());

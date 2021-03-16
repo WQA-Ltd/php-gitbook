@@ -4,16 +4,15 @@ Note that The GitBook API is still in beta, so the underlying API and this wrapp
 
 # Features
 - ✅ Authentication
-- ✅ Current user
-- ⬜️ Current user organisations
-- ⬜️ Get User
+- ✅ Get Current user
+- ✅ Get User
 - ⬜️ Get Organization
+- ⬜️ Get Organisations
 - ⬜️ List Current User Spaces
 - ⬜️ List User or Organization Spaces
 - ⬜️ Get Space
 - ⬜️ Get Space Content Analytics
 - ⬜️ Get Space Search Analytics
-
 
 # Usage
 
@@ -27,4 +26,10 @@ $gitbook = new GitbookClient($secretKey);
 
 ```php
 $gitbook->getCurrentUser();
+```
+
+## Get user
+
+```php
+$gitbook->getUser($userUid);
 ```
