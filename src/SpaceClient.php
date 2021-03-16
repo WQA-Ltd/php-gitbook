@@ -5,15 +5,16 @@ namespace WQA\Gitbook;
 use GuzzleHttp\Client;
 use WQA\Gitbook\Models\Page;
 use WQA\Gitbook\Models\Space;
-use WQA\Gitbook\Models\Content;
+use WQA\Gitbook\Models\Variant;
+use WQA\Gitbook\Models\Revision;
 
 class SpaceClient
 {
     protected $client;
     protected $spaceUid;
-    protected $variantUid = 'master';
-    protected $revisionUid;
-    protected $draftUid;
+    // protected $variantUid = 'master';
+    // protected $revisionUid;
+    // protected $draftUid;
 
     public function __construct(Client $client, string $spaceUid)
     {
@@ -31,61 +32,76 @@ class SpaceClient
         return null;
     }
 
-    public function getContent(): ?Content
+    public function revision(?string $revisionUid): RevisionClient
     {
-        $response = $this->client->request('GET', $this->contentUri());
-        if ($response->getStatusCode() === 200) {
-            return Content::createFromApi($response->getBody());
-        }
-
-        return null;
+        return new RevisionClient($this->client, $this->spaceUid, $revisionUid);
     }
 
-    public function getPage($pageUid): ?Page
+    public function primaryRevision(): RevisionClient
     {
-        $response = $this->client->request('GET', $this->contentUri("/id/{$pageUid}"));
-        if ($response->getStatusCode() === 200) {
-            return Page::createFromApi($response->getBody());
-        }
-
-        return null;
+        return $this->revision(null);
     }
 
-    public function forVariant(string $variantUid): self
+    public function draft(?string $draftUid): RevisionClient
     {
-        $this->variantUid = $variantUid;
-
-        return $this;
+        return (new RevisionClient($this->client, $this->spaceUid, $draftUid))->asDraft();
     }
 
-    public function forDraft(string $draftUid): self
-    {
-        $this->draftUid = $draftUid;
+    // public function getVariant(): ?Variant
+    // {
+    //     $response = $this->client->request('GET', $this->variantUri());
+    //     if ($response->getStatusCode() === 200) {
+    //         return Variant::createFromApi($response->getBody());
+    //     }
 
-        return $this;
-    }
+    //     return null;
+    // }
 
-    public function forRevision(string $revisionUid): self
-    {
-        $this->revisionUid = $revisionUid;
+    // public function getPage($pageUid): ?Page
+    // {
+    //     $response = $this->client->request('GET', $this->variantUri("/id/{$pageUid}"));
+    //     if ($response->getStatusCode() === 200) {
+    //         return Page::createFromApi($response->getBody());
+    //     }
 
-        return $this;
-    }
+    //     return null;
+    // }
 
-    protected function contentUri($append = '')
-    {
-        $base = "spaces/{$this->spaceUid}";
+    // public function forVariant(string $variantUid): self
+    // {
+    //     $this->variantUid = $variantUid;
 
-        if ($this->draftUid) {
-            $base . "/drafts/{$this->draftUid}";
-        }
+    //     return $this;
+    // }
 
-        if ($this->revisionUid) {
-            $base . "/revisions/{$this->revisionUid}";
-        }
+    // public function forDraft(string $draftUid): self
+    // {
+    //     $this->draftUid = $draftUid;
 
-        $uri = $base . "/content/v/{$this->variantUid}" . $append;
+    //     return $this;
+    // }
 
-        return $uri;
-    }
+    // public function forRevision(string $revisionUid): self
+    // {
+    //     $this->revisionUid = $revisionUid;
+
+    //     return $this;
+    // }
+
+    // protected function variantUri($append = '')
+    // {
+    //     $base = "spaces/{$this->spaceUid}";
+
+    //     if ($this->draftUid) {
+    //         $base . "/drafts/{$this->draftUid}";
+    //     }
+
+    //     if ($this->revisionUid) {
+    //         $base . "/revisions/{$this->revisionUid}";
+    //     }
+
+    //     $uri = $base . "/content/v/{$this->variantUid}" . $append;
+
+    //     return $uri;
+    // }
 }

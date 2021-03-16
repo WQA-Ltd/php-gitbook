@@ -2,7 +2,7 @@
 
 namespace WQA\Gitbook\Models;
 
-class Content extends Model
+class Variant extends Model
 {
     /** @var string */
     public $uid;
@@ -10,9 +10,6 @@ class Content extends Model
     /** @var string */
     public $ref;
 
-    /** @var string */
-    public $title;
-
-    /** @var SOMETHING[] */
+    /** @var Page[] */
     public $page;
 }

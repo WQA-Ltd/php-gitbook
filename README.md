@@ -2,19 +2,6 @@
 
 Note that The GitBook API is still in beta, so the underlying API and this wrapper are subject to change.
 
-# Features
-- ✅ Authentication
-- ✅ Get Current user
-- ✅ Get User
-- ⬜️ Get Organization
-- ⬜️ Get Organisations
-- ✅ List Current User Spaces
-- ✅ List User or Organization Spaces
-- ✅ Get Space
-- ⬜️ Get Space Content Analytics
-- ⬜️ Get Space Search Analytics
-- ✅ Get Space Content
-
 # Usage
 
 ## Create a client
@@ -54,8 +41,22 @@ $gitbook->getSpacesFor($organisationUid);
 $gitbook->space($spaceUid)->get();
 ```
 
-## Get space content
+## Get space revision
 
 ```php
-$gitbook->space($spaceUid)->getContent();
+$gitbook->space($spaceUid)->primaryRevision()->get();
+$gitbook->space($spaceUid)->revision($revisionUid)->get();
+```
+
+## Get space draft revision
+
+```php
+$gitbook->space($spaceUid)->draft($draftUid)->get();
+```
+
+## Get space variant
+
+```php
+$gitbook->space($spaceUid)->primaryRevision()->getVariant();
+$gitbook->space($spaceUid)->primaryRevision()->getVariant('spanish');
 ```
