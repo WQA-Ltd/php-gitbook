@@ -9,10 +9,11 @@ Note that The GitBook API is still in beta, so the underlying API and this wrapp
 - ⬜️ Get Organization
 - ⬜️ Get Organisations
 - ✅ List Current User Spaces
-- ⬜️ List User or Organization Spaces
-- ⬜️ Get Space
+- ✅ List User or Organization Spaces
+- ✅ Get Space
 - ⬜️ Get Space Content Analytics
 - ⬜️ Get Space Search Analytics
+- ✅ Get Space Content
 
 # Usage
 
@@ -45,4 +46,16 @@ $gitbook->getSpaces();
 ```php
 $gitbook->getSpacesFor($userUid);
 $gitbook->getSpacesFor($organisationUid);
+```
+
+## Get space
+
+```php
+$gitbook->space($spaceUid)->get();
+```
+
+## Get space content
+
+```php
+$gitbook->space($spaceUid)->getContent();
 ```

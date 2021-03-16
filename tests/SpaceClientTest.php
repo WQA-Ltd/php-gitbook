@@ -44,7 +44,7 @@ class SpaceClientTest extends TestCase
 
     public function test_can_get_space_content_for_variant()
     {
-        $this->assertInstanceOf(Space::class, $this->spaceClient->forVariant('testing')->getContent());
+        $this->assertInstanceOf(Content::class, $this->spaceClient->forVariant('testing')->getContent());
     }
 
     public function test_can_get_page()

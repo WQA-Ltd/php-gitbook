@@ -84,6 +84,8 @@ class SpaceClient
             $base . "/revisions/{$this->revisionUid}";
         }
 
-        return $base . "/content/v/{$this->variantUid}" . $append;
+        $uri = $base . "/content/v/{$this->variantUid}" . $append;
+
+        return $uri;
     }
 }
