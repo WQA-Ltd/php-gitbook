@@ -9,7 +9,13 @@ class SpaceTest extends TestCase
 {
     public function test_can_create_space_from_api_response()
     {
-        $fakeResponse = '{"uid":"-MUTwNPskpIxMRpmIoAA","name":"KB","baseName":"kb","private":false,"unlisted":true}';
+        $fakeResponse = '{
+            "uid": "-MUTwNPskpIxMRpmIoAA",
+            "name": "KB",
+            "baseName": "kb",
+            "private": false,
+            "unlisted": true
+        }';
         $space = Space::createFromApi($fakeResponse);
 
         $this->assertEquals('-MUTwNPskpIxMRpmIoAA', $space->uid);

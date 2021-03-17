@@ -10,8 +10,12 @@ abstract class Model
 
         $self = new static;
 
-        foreach ($data as $key => $value) {
-            $self->{$key} = $value;
+        if ($data) {
+            foreach ($data as $key => $value) {
+                $self->{$key} = $value;
+            }
+
+            $self->hydrate();
         }
 
         return $self;
@@ -29,5 +33,10 @@ abstract class Model
         }
 
         return $models;
+    }
+
+    protected function hydrate(): void
+    {
+        //
     }
 }

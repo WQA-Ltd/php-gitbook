@@ -15,4 +15,9 @@ class Variant extends Model
 
     /** @var Page[] */
     public $page;
+
+    protected function hydrate(): void
+    {
+        $this->page = Page::createFromApi(json_encode($this->page));
+    }
 }
