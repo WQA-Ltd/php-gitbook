@@ -3,8 +3,11 @@
 namespace WQA\Gitbook;
 
 use GuzzleHttp\Client;
+use WQA\Gitbook\Models\Page;
+use InvalidArgumentException;
 use WQA\Gitbook\Models\Variant;
 use WQA\Gitbook\Models\Revision;
+use WQA\Gitbook\Enums\PageFormat;
 
 class RevisionClient
 {
@@ -44,6 +47,36 @@ class RevisionClient
 
         if ($response->getStatusCode() === 200) {
             return Variant::createFromApi($response->getBody());
+        }
+
+        return null;
+    }
+
+    public function getPage(string $pageUid, string $variantUid = 'master', string $format = PageFormat::Document): ?Page
+    {
+        if (! PageFormat::isValid($format)) {
+            throw new InvalidArgumentException('Please use a valid page format.');
+        }
+
+        $response = $this->client->request('GET', $this->generateApiUri("/v/{$variantUid}/id/{$pageUid}?format={$format}"));
+
+        if ($response->getStatusCode() === 200) {
+            return Page::createFromApi($response->getBody());
+        }
+
+        return null;
+    }
+
+    public function getPageByUrl(string $pageUrl, string $variantUid = 'master', string $format = PageFormat::Document): ?Page
+    {
+        if (! PageFormat::isValid($format)) {
+            throw new InvalidArgumentException('Please use a valid page format.');
+        }
+
+        $response = $this->client->request('GET', $this->generateApiUri("/v/{$variantUid}/url/{$pageUrl}?format={$format}"));
+
+        if ($response->getStatusCode() === 200) {
+            return Page::createFromApi($response->getBody());
         }
 
         return null;
