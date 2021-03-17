@@ -75,3 +75,9 @@ $gitbook->space($spaceUid)->primaryRevision()->getPageByUrl($pageUrl, 'spanish')
 $gitbook->space($spaceUid)->primaryRevision()->getPage($pageUid, 'master', PageFormat::Markdown);
 $gitbook->space($spaceUid)->primaryRevision()->getPageByUrl($pageUrl, 'master', PageFormat::Markdown);
 ```
+
+## Get space assets
+
+```php
+$gitbook->space($spaceUid)->primaryRevision()->getAssets();
+```

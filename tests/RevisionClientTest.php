@@ -4,6 +4,7 @@ namespace WQA\Gitbook\Tests;
 
 use Dotenv\Dotenv;
 use InvalidArgumentException;
+use WQA\Gitbook\Models\Asset;
 use WQA\Gitbook\GitbookClient;
 use PHPUnit\Framework\TestCase;
 use WQA\Gitbook\Models\Variant;
@@ -73,5 +74,11 @@ class RevisionClientTest extends TestCase
     public function test_can_get_page_content_by_url()
     {
         $this->assertInstanceOf(PageContent::class, $this->revisionClient->getPageByUrl('/how-to-use-an-api/api-2'));
+    }
+
+    public function test_can_get_revision_assets()
+    {
+        $assets = $this->revisionClient->getAssets();
+        $this->assertInstanceOf(Asset::class, $assets[0]);
     }
 }

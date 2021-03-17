@@ -2,7 +2,7 @@
 
 namespace WQA\Gitbook\Models;
 
-class PageContent extends Model
+class Asset extends Model
 {
     /** @var string */
     public $uid;

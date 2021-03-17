@@ -4,6 +4,7 @@ namespace WQA\Gitbook;
 
 use GuzzleHttp\Client;
 use InvalidArgumentException;
+use WQA\Gitbook\Models\Asset;
 use WQA\Gitbook\Models\Variant;
 use WQA\Gitbook\Models\Revision;
 use WQA\Gitbook\Enums\PageFormat;
@@ -77,6 +78,17 @@ class RevisionClient
 
         if ($response->getStatusCode() === 200) {
             return PageContent::createFromApi($response->getBody());
+        }
+
+        return null;
+    }
+
+    public function getAssets(): array
+    {
+        $response = $this->client->request('GET', $this->generateApiUri('/assets'));
+
+        if ($response->getStatusCode() === 200) {
+            return Asset::createMultipleFromApi($response->getBody());
         }
 
         return null;
