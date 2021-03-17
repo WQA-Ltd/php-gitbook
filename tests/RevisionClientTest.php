@@ -3,7 +3,6 @@
 namespace WQA\Gitbook\Tests;
 
 use Dotenv\Dotenv;
-use WQA\Gitbook\Models\Page;
 use InvalidArgumentException;
 use WQA\Gitbook\GitbookClient;
 use PHPUnit\Framework\TestCase;
@@ -11,6 +10,7 @@ use WQA\Gitbook\Models\Variant;
 use WQA\Gitbook\RevisionClient;
 use WQA\Gitbook\Models\Revision;
 use WQA\Gitbook\Enums\PageFormat;
+use WQA\Gitbook\Models\PageContent;
 
 class RevisionClientTest extends TestCase
 {
@@ -49,29 +49,29 @@ class RevisionClientTest extends TestCase
         $this->assertInstanceOf(Variant::class, $this->revisionClient->getVariant('testing'));
     }
 
-    public function test_can_get_page()
+    public function test_can_get_page_content()
     {
-        $this->assertInstanceOf(Page::class, $this->revisionClient->getPage('-MUTwR2e5f5G0xp0CnOs'));
+        $this->assertInstanceOf(PageContent::class, $this->revisionClient->getPage('-MUTwR2e5f5G0xp0CnOs'));
     }
 
-    public function test_can_get_page_for_variant()
+    public function test_can_get_page_content_for_variant()
     {
-        $this->assertInstanceOf(Page::class, $this->revisionClient->getPage('-MUTwR2e5f5G0xp0CnOs', 'testing'));
+        $this->assertInstanceOf(PageContent::class, $this->revisionClient->getPage('-MUTwR2e5f5G0xp0CnOs', 'testing'));
     }
 
-    public function test_can_get_page_as_markdown()
+    public function test_can_get_page_content_as_markdown()
     {
-        $this->assertInstanceOf(Page::class, $this->revisionClient->getPage('-MUTwR2e5f5G0xp0CnOs', 'testing', PageFormat::Markdown));
+        $this->assertInstanceOf(PageContent::class, $this->revisionClient->getPage('-MUTwR2e5f5G0xp0CnOs', 'testing', PageFormat::Markdown));
     }
 
-    public function test_cannot_get_page_with_invalid_format()
+    public function test_cannot_get_page_content_with_invalid_format()
     {
         $this->expectException(InvalidArgumentException::class);
         $this->revisionClient->getPage('-MUTwR2e5f5G0xp0CnOs', 'testing', 'invalid_format');
     }
 
-    public function test_can_get_page_by_url()
+    public function test_can_get_page_content_by_url()
     {
-        $this->assertInstanceOf(Page::class, $this->revisionClient->getPageByUrl('/how-to-use-an-api/api-2'));
+        $this->assertInstanceOf(PageContent::class, $this->revisionClient->getPageByUrl('/how-to-use-an-api/api-2'));
     }
 }

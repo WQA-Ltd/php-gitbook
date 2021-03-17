@@ -7,6 +7,9 @@ class Revision extends Model
     /** @var string */
     public $uid;
 
+    /** @var string[] */
+    public $parents;
+
     /** @var Variant[] */
     public $variants;
 

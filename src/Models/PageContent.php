@@ -2,7 +2,7 @@
 
 namespace WQA\Gitbook\Models;
 
-class Page extends Model
+class PageContent extends Model
 {
     /** @var string */
     public $uid;
@@ -21,4 +21,7 @@ class Page extends Model
 
     /** @var Page[] */
     public $pages;
+
+    /** @var object|string */
+    public $document;
 }
