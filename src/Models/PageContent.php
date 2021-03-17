@@ -27,12 +27,6 @@ class PageContent extends Model
 
     protected function hydrate(): void
     {
-        $pageModels = [];
-
-        foreach ($this->pages as $page) {
-            $pageModels[] = Page::createFromApi(json_encode($page));
-        }
-
-        $this->pages = $pageModels;
+        $this->pages = $this->hydrateModels($this->pages, Page::class);
     }
 }

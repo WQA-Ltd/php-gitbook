@@ -39,4 +39,15 @@ abstract class Model
     {
         //
     }
+
+    protected function hydrateModels(array $items, string $modelClass): array
+    {
+        $models = [];
+
+        foreach ($items as $item) {
+            $models[] = $modelClass::createFromApi(json_encode($item));
+        }
+
+        return $models;
+    }
 }

@@ -18,29 +18,7 @@ class Revision extends Model
 
     protected function hydrate(): void
     {
-        $this->hydrateVariants();
-        $this->hydrateAssets();
-    }
-
-    protected function hydrateVariants(): void
-    {
-        $variantModels = [];
-
-        foreach ($this->variants as $variant) {
-            $variantModels[] = Variant::createFromApi(json_encode($variant));
-        }
-
-        $this->variants = $variantModels;
-    }
-
-    protected function hydrateAssets(): void
-    {
-        $assetModels = [];
-
-        foreach ($this->assets as $asset) {
-            $assetModels[] = Asset::createFromApi(json_encode($asset));
-        }
-
-        $this->assets = $assetModels;
+        $this->variants = $this->hydrateModels($this->variants, Variant::class);
+        $this->assets = $this->hydrateModels($this->assets, Asset::class);
     }
 }
