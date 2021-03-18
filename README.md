@@ -2,6 +2,10 @@
 
 Note that The GitBook API is still in beta, so the underlying API and this wrapper are subject to change.
 
+# Install
+
+`composer require wqa/php-gitbook`
+
 # Usage
 
 ## Create a client
